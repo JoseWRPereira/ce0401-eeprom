@@ -44,33 +44,33 @@ void delay( long t )
 //***************** Programa Principal
 void main(void)
 {
-    char vetor[10] = "         ";
-    delay(1000);
+    char vetor[11] = "          ";
+    char i;
+    
     initLCD();
-    delay(1000);
-    lcd(0,0,"     EEPROM     ");
-    lcd(0,1,"Curta Eletronica");
 
+    lcd(0,0,"Curta Eletronica");
+    lcd(0,1,"          EEPROM");
 
-    vetor[0] = EEPROM_read(0);
-    vetor[1] = EEPROM_read(1);
-    vetor[2] = EEPROM_read(2);
-    vetor[3] = EEPROM_read(3);
+    if( EEPROM_read(0) == 255 )
+        for( i=0; i<10; i++ )
+            EEPROM_write(i,i+'0' );
+        
+    for( i=0; i<10; i++ )
+        vetor[i] = EEPROM_read(i);
+
     lcd(0,1, vetor );
 
     delay(5000);
+    
+    for( i=0; i<10; i++ )
+       EEPROM_write(i,vetor[(i+1)%10] );
 
-    
-    EEPROM_write(0,'1');
-    EEPROM_write(1,'2');
-    EEPROM_write(2,'3');
-    EEPROM_write(3,'4');
-    
-    vetor[0] = EEPROM_read(0);
-    vetor[1] = EEPROM_read(1);
-    vetor[2] = EEPROM_read(2);
-    vetor[3] = EEPROM_read(3);
+    for( i=0; i<10; i++ )
+       vetor[i] = EEPROM_read(i);
+
     lcd(0,1, vetor );
+
     while( 1 )                      // Laço de repetição infinita.
     {
         

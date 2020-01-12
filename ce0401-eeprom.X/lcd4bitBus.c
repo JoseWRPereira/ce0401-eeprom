@@ -242,18 +242,20 @@ char lcdb1( void )
 void initLCD( void )
 {
     unsigned char i,j;
+    __delay_ms(100);
     LCD_BUS = 0;
     LCD_RS = 0;
     LCD_EN = 1;
     TRISD = 0xC0;
 
-    __delay_ms(1000/4);
+    
+//    __delay_ms(250);
     lcdcmd(LCD_FUNCTION_SET | LCD_FS_DATA_LENGTH_4 );
-    __delay_ms(1000/4);
+//    __delay_ms(250);
     lcdcmd(LCD_FUNCTION_SET | LCD_FS_LINE_NUMBER_2 );
-    __delay_ms(1000/4);
+//    __delay_ms(250);
     lcdcmd(LCD_DISPLAY_CONTROL | LCD_DC_DISPLAY_ON );
-    __delay_ms(1000/4);
+//    __delay_ms(250);
 
     for( j=0; j<LCD_ROWS; j++ )
     {
@@ -265,9 +267,7 @@ void initLCD( void )
         }
     }
     
-    __delay_ms(1000);
+//    __delay_ms(250);
     lcdcmd( LCD_CLEAR_DISPLAY );
     lcdcmd( LCD_RETURN_HOME );
-
-
 }

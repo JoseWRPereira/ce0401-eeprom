@@ -5,9 +5,7 @@
  * Created on 10 de Janeiro de 2020, 16:34
  */
 
-
 #include <xc.h>
-
 
 char EEPROM_read( unsigned char addr )
 {
